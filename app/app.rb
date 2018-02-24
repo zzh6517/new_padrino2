@@ -6,6 +6,15 @@ module NewPadrino2
     register Padrino::Helpers
     enable :sessions
 
+
+  get '/provider.json', :provides => 'json' do
+    
+  end
+
+  get '/provider.string' do
+    "string123"
+  end
+
     ##
     # Caching support.
     #
