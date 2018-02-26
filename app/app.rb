@@ -6,25 +6,28 @@ module NewPadrino2
     register Padrino::Helpers
     enable :sessions
 
+#响应/provider.string请求
+  get '/provider.string' do
+    "新年快乐"
+  end
 
+#响应/provider.json请求
   get '/provider.json', :provides => [:json] do
-    if params[:valid_date].nil?
-      [400, '"valid_date is required"']
+    if params[:city].nil?
+      [400, '"城市不能为空"']
+    elsif params[:city] != '上海'
+      [400, '"城市必须是上海"']
     else
       begin
         string_data = JSON.pretty_generate({
-          :test => 'NO',
-          :date => "2013-08-16T15:31:20+10:00",
-          :count => 1000
+          "城市" => "上海",
+          "天气" => "晴",
+          "温度" => "20度"
         })
       rescue ArgumentError => e
-        [400, "\"\'#{params[:valid_date]}\' is not a date\""]
+        [400, "\"\'#{params[:city]}\' error\""]
       end
     end
-  end
-
-  get '/provider.string' do
-    "Happy New Year"
   end
 
     ##
