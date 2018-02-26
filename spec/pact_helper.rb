@@ -11,10 +11,17 @@ end
 
 Pact.provider_states_for "new padrino1" do
 
-  provider_state "provider is in a sane state" do
+  provider_state "返回json数据的服务提供者" do
     set_up do
       # Your set up code goes here
     end
   end
+
+  provider_state "返回string数据的服务提供者" do
+    set_up do
+      # Your set up code goes here
+    end
+  end
+
 
 end

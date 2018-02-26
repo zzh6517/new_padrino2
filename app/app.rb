@@ -7,12 +7,24 @@ module NewPadrino2
     enable :sessions
 
 
-  get '/provider.json', :provides => 'json' do
-    
+  get '/provider.json', :provides => [:json] do
+    if params[:valid_date].nil?
+      [400, '"valid_date is required"']
+    else
+      begin
+        string_data = JSON.pretty_generate({
+          :test => 'NO',
+          :date => "2013-08-16T15:31:20+10:00",
+          :count => 1000
+        })
+      rescue ArgumentError => e
+        [400, "\"\'#{params[:valid_date]}\' is not a date\""]
+      end
+    end
   end
 
   get '/provider.string' do
-    "string123"
+    "Happy New Year"
   end
 
     ##
